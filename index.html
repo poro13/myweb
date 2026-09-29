@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNK부산은행</title>
+    <style>
+        /* basic */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:
+                "Pretendard",
+                "Noto Sans KR",
+                Arial,
+                sans-serif;
+
+            color: #222;
+            background: #fff;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        button {
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
+
+        .header {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-top {
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-left,
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            font-size: 13px;
+            color: #666;
+        }
+
+        .inner {
+            width: 1200px;
+            max-width: calc(100% - 40px);
+            margin: 0 auto;
+        }
+
+        .header-top .inner {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-main {
+            height: 82px;
+        }
+
+        .header-main .inner {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            flex: 0 0 180px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0066b3;
+        }
+
+        .gnb {
+            gap: 15px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-actions {
+            flex: 0 0 150px;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-actions button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        header {
+            display: block;
+            unicode-bidi: isolate;
+        }
+
+
+        .hero {
+            background: #eaf5ff;
+        }
+
+        .hero .inner {
+            height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text .label {
+            display: inline-block;
+
+            margin-bottom: 18px;
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            background: #0066b3;
+            color: white;
+
+            font-size: 13px;
+        }
+
+        .hero-text h1 {
+            margin: 0 0 15px;
+            font-size: 36px;
+            line-height: 1.3;
+        }
+
+        .hero-text p {
+            margin: 0;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .hero-image {
+            flex: 0 0 400px;
+
+            height: 230px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: #d4ebff;
+            color: #0066b3;
+
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .quick-section {
+            padding: 35px 0;
+        }
+
+        .quick-menu {
+            display: flex;
+            gap: 12px;
+        }
+
+        .quick-item {
+            flex: 1;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #ddd;
+            border-radius: 12px;
+
+            background: #fff;
+            transition: 0.2s;
+        }
+
+        .quick-item:hover {
+            border-color: #0066b3;
+            color: #0066b3;
+        }
+
+
+        /* 컨텐츠 */
+        .content-section {
+            padding: 20px 0 60px;
+        }
+
+        .content-layout {
+            display: flex;
+            gap: 24px;
+        }
+
+        .content-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content-right {
+            flex: 0 0 330px;
+        }
+
+        .content-box {
+            border: 1px solid #e1e1e1;
+            border-radius: 14px;
+            background-color: white;
+        }
+
+        .content-box+.content-box {
+            margin-top: 24px;
+        }
+
+        .box-header {
+            height: 65px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .box-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .more {
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* 뉴스 */
+        .news-list {
+            padding: 10px 24px;
+        }
+
+        .news-item {
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .news-item:last-child {
+            border-bottom: 0;
+        }
+
+        .news-title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 14px;
+        }
+
+        .news-date {
+            flex: 0 0 auto;
+            margin-left: 20px;
+            font-size: 12px;
+        }
+
+        /* 로그인 박스 */
+        .login-box {
+            padding: 25px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 20px;
+            font-size: 20px;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .login-buttons button {
+            flex: 1;
+            height: 48px;
+            border-radius: 6px;
+            background: #0066b3;
+            color: white;
+            font-size: 14px;
+        }
+
+        .login-buttons button.secondary {
+            background: #f1f5f8;
+            color: #333;
+        }
+
+        /* 뱅킹 서비스 */
+        .service-list {
+            padding: 10px 24px 20px;
+        }
+
+        .service-item {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .service-item:last-child {
+            border-bottom: 0;
+        }
+
+        /* 이벤트 */
+        .event-section {
+            padding: 60px 0;
+        }
+
+        .event-list {
+            display: flex;
+            gap: 20px;
+        }
+
+        .event-card {
+            flex: 1;
+            min-height: 180px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 15px;
+            background: #eef7ff;
+        }
+
+        .event-card:nth-child(2) {
+            background: #f2f7ec;
+        }
+
+        .event-card:nth-child(3) {
+            background: #fff4e8;
+        }
+
+        .event-card h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .event-card p {
+            margin: 10px 0 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* 예금 대출 등 product */
+        .product-section {
+            padding: 60px 0;
+            background: #f7f9fb;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .section-title a {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .product-list {
+            display: flex;
+            gap: 16px;
+        }
+
+        .product-card {
+            flex: 1;
+            min-width: 0;
+            min-height: 210px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .product-category {
+            color: #0066b3;
+            font-size: 13px;
+        }
+
+        .product-card h3 {
+            margin: 15px 0 10px;
+            font-size: 18px;
+        }
+
+        .product-card p {
+            margin: 0;
+            color: #777;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .product-rate {
+            color: #0066b3;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* responsive */
+        @media (max-width: 900px) {
+
+            .gnb {
+                gap: 15px;
+            }
+
+            .gnb a {
+                font-size: 14px;
+            }
+
+            .hero-image {
+                flex-basis: 300px;
+            }
+
+            .content-layout {
+                flex-direction: column;
+            }
+
+            .content-right {
+                flex-basis: auto;
+            }
+
+            .product-list {
+                flex-wrap: wrap;
+            }
+
+            .product-card {
+                flex: 1 1 calc(50% - 8px);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .inner {
+                max-width: calc(100% - 30px);
+            }
+
+            .header-top {
+                display: none;
+            }
+
+            .header-main {
+                height: 65px;
+            }
+
+            .logo {
+                flex-basis: auto;
+            }
+
+            .gnb {
+                display: none;
+            }
+
+            .hero .inner {
+                height: auto;
+                padding: 45px 0;
+
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 28px;
+            }
+
+            .hero-image {
+                width: 100%;
+                flex-basis: 160px;
+            }
+
+            .quick-menu {
+                flex-wrap: wrap;
+            }
+
+            .quick-item {
+                flex: 1 1 calc(50% - 6px);
+            }
+
+            .product-card {
+                flex-basis: 100%;
+            }
+
+            .event-list {
+                flex-direction: column;
+            }
+
+            .footer-top {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 20px;
+                padding: 25px 0;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="site">
+        <header class="header">
+            <!-- 상단 유틸 -->
+            <div class="header-top">
+
+                <div class="inner">
+
+                    <div class="top-left">
+                        <a href="#">개인뱅킹</a>
+                        <a href="#">기업뱅킹</a>
+                        <a href="#">금융상품</a>
+                    </div>
+
+                    <div class="top-right">
+                        <a href="#">로그인</a>
+                        <a href="#">인증센터</a>
+                        <a href="#">은행소개</a>
+                        <a href="#">Global</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 메인 헤더 -->
+            <div class="header-main">
+
+                <div class="inner">
+
+                    <div class="logo">
+                        BNK 부산은행
+                    </div>
+
+                    <nav class="gnb">
+
+                        <a href="#">개인뱅킹</a>
+                        <a href="#">기업뱅킹</a>
+                        <a href="#">금융상품</a>
+                        <a href="#">카드</a>
+                        <a href="#">서비스</a>
+
+                    </nav>
+
+                    <div class="header-actions">
+
+                        <button>⌕</button>
+                        <button>☰</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <div class="inner">
+
+                    <div class="hero-text">
+
+                        <span class="label">
+                            BNK 부산은행
+                        </span>
+
+                        <h1>
+                            당신의 금융생활을<br>
+                            더 편리하게
+                        </h1>
+
+                        <p>
+                            일상 속 금융을 쉽고 편리하게 만나보세요.
+                        </p>
+
+                    </div>
+
+                    <div class="hero-image">
+                        MAIN BANNER
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="quick-section">
+
+                <div class="inner">
+
+                    <div class="quick-menu">
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">💰</div>
+                            <span>계좌조회</span>
+                        </a>
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">↔</div>
+                            <span>이체</span>
+                        </a>
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">💳</div>
+                            <span>카드</span>
+                        </a>
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">📄</div>
+                            <span>증명서발급</span>
+                        </a>
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">🏦</div>
+                            <span>영업점 찾기</span>
+                        </a>
+
+                        <a href="#" class="quick-item">
+                            <div class="quick-icon">☎</div>
+                            <span>고객센터</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- content -->
+            <section class="content-section">
+                <div class="inner">
+                    <div class="content-layout">
+                        <!-- left -->
+                        <div class="content-left">
+
+                            <div class="content-box">
+
+                                <div class="box-header">
+
+                                    <h2>새소식</h2>
+
+                                    <a href="#" class="more">
+                                        더보기 +
+                                    </a>
+
+                                </div>
+
+                                <div class="news-list">
+
+                                    <a href="#" class="news-item">
+                                        <span class="news-title">
+                                            부산은행 새로운 금융서비스를 안내드립니다.
+                                        </span>
+                                        <span class="news-date">
+                                            2026.09.28
+                                        </span>
+                                    </a>
+
+                                    <a href="#" class="news-item">
+                                        <span class="news-title">
+                                            인터넷뱅킹 서비스 이용 안내
+                                        </span>
+                                        <span class="news-date">
+                                            2026.09.25
+                                        </span>
+                                    </a>
+
+                                    <a href="#" class="news-item">
+                                        <span class="news-title">
+                                            금융상품 변경사항 안내
+                                        </span>
+                                        <span class="news-date">
+                                            2026.09.22
+                                        </span>
+                                    </a>
+
+                                    <a href="#" class="news-item">
+                                        <span class="news-title">
+                                            시스템 점검 일정 안내
+                                        </span>
+                                        <span class="news-date">
+                                            2026.09.20
+                                        </span>
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- event -->
+                            <div class="content-box">
+
+                                <div class="box-header">
+
+                                    <h2>이벤트</h2>
+
+                                    <a href="#" class="more">
+                                        더보기 +
+                                    </a>
+
+                                </div>
+
+                                <div style="padding: 25px;">
+
+                                    <div class="event-list">
+
+                                        <div class="event-card">
+                                            <div>
+                                                <h3>Welcome Event</h3>
+                                                <p>새로운 고객을 위한 특별한 혜택</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="event-card">
+                                            <div>
+                                                <h3>Digital Banking</h3>
+                                                <p>모바일 금융서비스 이벤트</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- right -->
+                        <aside class="content-right">
+
+                            <div class="content-box login-box">
+
+                                <h2>빠른 로그인</h2>
+
+                                <div class="login-buttons">
+
+                                    <button>
+                                        개인
+                                    </button>
+
+                                    <button class="secondary">
+                                        기업
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="content-box">
+
+                                <div class="box-header">
+
+                                    <h2>빠른서비스</h2>
+
+                                    <a href="#" class="more">
+                                        더보기 +
+                                    </a>
+
+                                </div>
+
+                                <div class="service-list">
+
+                                    <a href="#" class="service-item">
+                                        <span>환율조회</span>
+                                        <span>›</span>
+                                    </a>
+
+                                    <a href="#" class="service-item">
+                                        <span>금리조회</span>
+                                        <span>›</span>
+                                    </a>
+
+                                    <a href="#" class="service-item">
+                                        <span>영업점 찾기</span>
+                                        <span>›</span>
+                                    </a>
+
+                                    <a href="#" class="service-item">
+                                        <span>ATM 찾기</span>
+                                        <span>›</span>
+                                    </a>
+
+                                    <a href="#" class="service-item">
+                                        <span>고객센터</span>
+                                        <span>›</span>
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="product-section">
+                <div class="inner">
+
+                    <div class="section-title">
+
+                        <h2>
+                            추천 금융상품
+                        </h2>
+
+                        <a href="#">
+                            전체 상품 보기 +
+                        </a>
+
+                    </div>
+
+                    <div class="product-list">
+                        <div class="product-card">
+                            <div>
+
+                                <span class="product-category">
+                                    예금
+                                </span>
+
+                                <h3>
+                                    BNK 주거래 우대통장
+                                </h3>
+
+                                <p>
+                                    주거래 고객을 위한 다양한 우대혜택
+                                </p>
+
+                            </div>
+
+                            <div class="product-bottom">
+
+                                <span class="product-rate">
+                                    최고 3.20%
+                                </span>
+
+                                <span>›</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="product-card">
+
+                            <div>
+
+                                <span class="product-category">
+                                    적금
+                                </span>
+
+                                <h3>
+                                    BNK 행복적금
+                                </h3>
+
+                                <p>
+                                    매월 꾸준히 저축하는 고객을 위한 상품
+                                </p>
+
+                            </div>
+
+                            <div class="product-bottom">
+
+                                <span class="product-rate">
+                                    최고 4.10%
+                                </span>
+
+                                <span>›</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="product-card">
+
+                            <div>
+
+                                <span class="product-category">
+                                    대출
+                                </span>
+
+                                <h3>
+                                    BNK 신용대출
+                                </h3>
+
+                                <p>
+                                    편리하고 간편한 신용대출 상품
+                                </p>
+
+                            </div>
+
+                            <div class="product-bottom">
+
+                                <span class="product-rate">
+                                    최저 4.50%
+                                </span>
+
+                                <span>›</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="product-card">
+
+                            <div>
+
+                                <span class="product-category">
+                                    카드
+                                </span>
+
+                                <h3>
+                                    BNK 생활카드
+                                </h3>
+
+                                <p>
+                                    일상생활에 필요한 다양한 혜택
+                                </p>
+
+                            </div>
+
+                            <div class="product-bottom">
+
+                                <span class="product-rate">
+                                    다양한 혜택
+                                </span>
+
+                                <span>›</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
