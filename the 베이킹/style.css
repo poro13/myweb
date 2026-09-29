@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+.box{
+    width: 1000px;
+    margin: 0px auto;
+}
+
+/* header */
+header .box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo{
+    display: flex;
+    align-items: center;
+}
+#menu{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+#top_menu{
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    font-size: 14px;
+}
+#main_menu{
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+/* main_image */
+#main_image{
+    height: 400px;
+    background-image: url(/img/main_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+#main_image a{
+    position: absolute;
+    left: 1150px;
+    top: 400px;
+}
+
+/* 사이드 바 */
+body > .box{
+    display: flex;
+    gap: 40px;
+}
+aside{
+    width: 300px;
+}
+aside p{
+    margin-top: 0;
+}
+aside .title1 {
+    background-color: rgb(10, 146, 103);
+    color: white;
+    font-weight: bold;
+}
+aside ul{
+    list-style: none;
+    padding: 0;
+}
+
+
+
+/* main section*/
+#main{
+    display: flex;
+    gap: 40px;
+}
+#main1{
+    display: flex;
+    flex-direction: column;
+}
+.latest{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.items{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    font-size: 14px;
+    line-height: 180%;
+}
+
+#main2{
+    display: flex;
+    flex-wrap: wrap;
+}
+#main2 h3{
+    width: 100%;
+}
+#main2 ul{
+    width: 50%;
+    box-sizing: border-box;
+    list-style: none;
+    padding: 0;
+}
+#main2 ul img{
+    width: 100px;
+    height: 100px;
+}
