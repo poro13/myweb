@@ -36,7 +36,7 @@ header .box{
 /* main_image */
 #main_image{
     height: 400px;
-    background-image: url(/img/main_bg.png);
+    background-image: url(./img/main_bg.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;
@@ -108,4 +108,43 @@ aside ul{
 #main2 ul img{
     width: 100px;
     height: 100px;
+}
+
+/* footer */
+footer .box{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: green;
+    color: #ffeeff;
+}
+
+footer ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#bottom_menu{
+    width: 100%;
+}
+
+#bottom_menu ul{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+footer .items{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+footer .items h3{
+    margin-bottom: 10px;
+}
+
+footer .items ul{
+    line-height: 120%;
 }
