@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 상세 페이지</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/detail.css">
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-top">
+            <div class="logo-area">
+                <h1>게임천국</h1>
+                <p>국내 최고의 게임 쇼핑몰</p>
+            </div>
+            <!-- 회원 메뉴 -->
+            <div class="user-menu">
+                <a href="#">주문조회</a>
+                <span>|</span>
+                <a href="#">로그인</a>
+                <span>|</span>
+                <a href="signup.html">회원가입</a>
+            </div>
+        </div>
+        <!-- nav -->
+        <div class="header-bottom">
+            <nav class="menu">
+                <ul>
+                    <li><a href="main.html">HOME</a></li>
+                    <li><a href="#">Nintendo Switch</a></li>
+                    <li><a href="#">PS5</a></li>
+                    <li><a href="#">예약상품</a></li>
+                    <li><a href="#">신상품</a></li>
+                    <li><a href="#">SALE</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="search">
+                    <input type="text" placeholder="게임을 검색해주세요.">
+                    <button>검색</button>
+                </div>
+                <a href="#" class="cart">
+                    장바구니
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- main -->
+    <main>
+        <!-- 경로 -->
+        <p class="breadcrumb">
+            HOME > Nintendo Switch2 > 젤다의 전설 시간의 오카리나
+        </p>
+
+        <!-- 상품 정보 -->
+        <section class="product-detail">
+            <!-- 왼쪽 상품 이미지 -->
+            <div class="detail-image">
+                <div class="image-box">
+                    <img src="./images/zelda.PNG" alt="젤다의 전설">
+                </div>
+            </div>
+            <!-- 오른쪽 상품 정보 -->
+            <div class="detail-info">
+                <!-- 상품명 -->
+                <h2>젤다의 전설 시간의 오카리나</h2>
+
+                <!-- 가격 -->
+                <div class="info-line price">
+                    <span>가격</span>
+                    <strong>88,000원</strong>
+                </div>
+
+                <!-- 배송비 -->
+                <div class="info-line">
+                    <span>배송비</span>
+                    <strong>3000원</strong>
+                </div>
+                <!-- 배송방법 -->
+                <div class="info-line">
+                    <span>배송방법</span>
+                    <strong>택배</strong>
+                </div>
+
+                <!-- 옵션 -->
+                <div class="option-area">
+                    <label for="option">
+                        옵션
+                    </label>
+                    <select id="option">
+                        <option>
+                            일반판
+                        </option>
+                        <option>
+                            한정판
+                        </option>
+                    </select>
+                </div>
+
+                <!-- 수량 -->
+                <div class="quantity-area">
+                    <span>수량</span>
+                    <div class="quantity-box">
+                        <button type="button">-</button>
+                        <input type="text" value="1" readonly>
+                        <button type="button">+</button>
+                    </div>
+                </div>
+
+                <!-- 버튼 -->
+                <div class="button-area">
+                    <button class="cart-button">
+                        장바구니
+                    </button>
+                    <button class="buy-button">
+                        구매하기
+                    </button>
+                    <a href="./product.html">산출물</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</body>
+
+</html>

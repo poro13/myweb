@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 20px;
+    }
+
+    .signup-card {
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 34px 32px 32px;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.6px;
+    }
+
+    .header p {
+      margin: 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group:last-of-type {
+      margin-bottom: 0;
+    }
+
+    label,
+    .section-title {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .required::after {
+      content: " *";
+      color: #ef4444;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      padding: 0 14px;
+      font-size: 15px;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    button {
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: 0.15s ease;
+    }
+
+    .sub-button {
+      flex: 0 0 112px;
+      height: 48px;
+      padding: 0 10px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+
+    .sub-button:hover {
+      background: #e5e7eb;
+    }
+
+    .help-text {
+      margin-top: 7px;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .password-rules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      margin-top: 8px;
+    }
+
+    .rule {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .rule.valid {
+      color: #16a34a;
+    }
+
+    .rule::before {
+      content: "○ ";
+    }
+
+    .rule.valid::before {
+      content: "✓ ";
+    }
+
+    .message {
+      min-height: 18px;
+      margin-top: 7px;
+      font-size: 12px;
+    }
+
+    .message.success {
+      color: #16a34a;
+    }
+
+    .message.error {
+      color: #dc2626;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 28px 0;
+      background: #e5e7eb;
+    }
+
+    .terms-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .terms-header .section-title {
+      margin: 0;
+      font-size: 17px;
+      color: #111827;
+    }
+
+    .all-agree {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 14px;
+      border: 1px solid #dbe2ea;
+      border-radius: 10px;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+
+    .all-agree span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .term-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      border-bottom: 1px solid #f0f1f3;
+    }
+
+    .term-item:last-child {
+      border-bottom: 0;
+    }
+
+    .check-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      accent-color: #4f46e5;
+      cursor: pointer;
+    }
+
+    .term-text {
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.4;
+    }
+
+    .badge-required,
+    .badge-optional {
+      margin-right: 4px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .badge-required {
+      color: #ef4444;
+    }
+
+    .badge-optional {
+      color: #6b7280;
+    }
+
+    .view-link {
+      flex: 0 0 auto;
+      color: #6b7280;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-size: 12px;
+      cursor: pointer;
+      background: none;
+      padding: 4px;
+    }
+
+    .view-link:hover {
+      color: #374151;
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 52px;
+      margin-top: 28px;
+      background: #4f46e5;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .submit-button:hover {
+      background: #4338ca;
+    }
+
+    .submit-button:active {
+      transform: translateY(1px);
+    }
+
+    .notice {
+      margin-top: 12px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        padding: 20px 12px;
+      }
+
+      .signup-card {
+        padding: 28px 20px 24px;
+        border-radius: 14px;
+      }
+
+      .header h1 {
+        font-size: 25px;
+      }
+
+      .input-row .sub-button {
+        flex-basis: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="signup-card">
+      <header class="header">
+        <h1>회원가입</h1>
+        <p>서비스 이용을 위해 필요한 정보만 입력해주세요.</p>
+      </header>
+
+      <form id="signupForm" novalidate>
+        <!-- 이름 -->
+        <div class="form-group">
+          <label class="required" for="name">이름</label>
+          <input id="name" name="name" type="text" placeholder="이름을 입력해주세요">
+        </div>
+
+        <!-- 휴대폰 번호 -->
+        <div class="form-group">
+          <label class="required" for="phone">휴대폰 번호</label>
+          <div class="input-row">
+            <input id="phone" name="phone" type="tel" inputmode="numeric" placeholder="010-1234-5678">
+            <button class="sub-button" type="button" id="sendCodeBtn">인증번호 받기</button>
+          </div>
+        </div>
+
+        <!-- 인증번호 -->
+        <div class="form-group">
+          <label class="required" for="verificationCode">인증번호</label>
+          <div class="input-row">
+            <input id="verificationCode" name="verificationCode" type="text" inputmode="numeric" maxlength="6" placeholder="인증번호를 입력해주세요">
+            <button class="sub-button" type="button" id="verifyBtn">인증</button>
+          </div>
+          <div class="message" id="phoneMessage"></div>
+        </div>
+
+        <!-- 아이디 -->
+        <div class="form-group">
+          <label class="required" for="username">아이디</label>
+          <div class="input-row">
+            <input id="username" name="username" type="text" autocomplete="username" placeholder="아이디를 입력해주세요">
+            <button class="sub-button" type="button" id="checkIdBtn">중복확인</button>
+          </div>
+          <div class="message" id="idMessage"></div>
+        </div>
+
+        <!-- 비밀번호 -->
+        <div class="form-group">
+          <label class="required" for="password">비밀번호</label>
+          <input id="password" name="password" type="password" autocomplete="new-password" placeholder="비밀번호를 입력해주세요">
+          <div class="password-rules">
+            <span class="rule" id="lengthRule">8자 이상</span>
+            <span class="rule" id="specialRule">특수문자 1개 이상</span>
+          </div>
+        </div>
+
+        <!-- 비밀번호 확인 -->
+        <div class="form-group">
+          <label class="required" for="passwordConfirm">비밀번호 확인</label>
+          <input id="passwordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" placeholder="비밀번호를 다시 입력해주세요">
+          <div class="message" id="passwordMessage"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 약관 -->
+        <section aria-labelledby="termsTitle">
+          <div class="terms-header">
+            <h2 class="section-title" id="termsTitle">약관 동의</h2>
+          </div>
+
+          <label class="all-agree">
+            <input type="checkbox" id="agreeAll">
+            <span>전체 약관에 동의합니다.</span>
+          </label>
+
+          <div class="term-item">
+            <label class="check-wrap">
+              <input type="checkbox" class="required-term" name="terms" value="service">
+              <span class="term-text"><span class="badge-required">[필수]</span>서비스 이용약관 동의</span>
+            </label>
+            <button class="view-link" type="button" data-term="서비스 이용약관">보기</button>
+          </div>
+
+          <div class="term-item">
+            <label class="check-wrap">
+              <input type="checkbox" class="required-term" name="terms" value="privacy">
+              <span class="term-text"><span class="badge-required">[필수]</span>개인정보 수집·이용 동의</span>
+            </label>
+            <button class="view-link" type="button" data-term="개인정보 수집·이용 동의">보기</button>
+          </div>
+
+          <div class="term-item">
+            <label class="check-wrap">
+              <input type="checkbox" class="optional-term" name="terms" value="marketing">
+              <span class="term-text"><span class="badge-optional">[선택]</span>마케팅 정보 수신 동의</span>
+            </label>
+            <button class="view-link" type="button" data-term="마케팅 정보 수신 동의">보기</button>
+          </div>
+        </section>
+
+        <button class="submit-button" type="submit">회원가입</button>
+        <p class="notice">현재 인증 및 중복확인은 화면만 구현되어 있습니다.</p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const password = document.getElementById('password');
+    const passwordConfirm = document.getElementById('passwordConfirm');
+    const idMessage = document.getElementById('idMessage');
+    const phoneMessage = document.getElementById('phoneMessage');
+    const lengthRule = document.getElementById('lengthRule');
+    const specialRule = document.getElementById('specialRule');
+    const agreeAll = document.getElementById('agreeAll');
+    const requiredTerms = [...document.querySelectorAll('.required-term')];
+    const allTerms = [...document.querySelectorAll('input[name="terms"]')];
+
+    function updatePasswordRules() {
+      const value = password.value;
+      const hasLength = value.length >= 8;
+      const hasSpecial = /[^A-Za-z0-9가-힣]/.test(value);
+
+      lengthRule.classList.toggle('valid', hasLength);
+      specialRule.classList.toggle('valid', hasSpecial);
+    }
+
+    function updatePasswordMessage() {
+      const message = document.getElementById('passwordMessage');
+      if (!passwordConfirm.value) {
+        message.textContent = '';
+        message.className = 'message';
+        return;
+      }
+
+      if (password.value === passwordConfirm.value) {
+        message.textContent = '비밀번호가 일치합니다.';
+        message.className = 'message success';
+      } else {
+        message.textContent = '비밀번호가 일치하지 않습니다.';
+        message.className = 'message error';
+      }
+    }
+
+    password.addEventListener('input', () => {
+      updatePasswordRules();
+      updatePasswordMessage();
+    });
+
+    passwordConfirm.addEventListener('input', updatePasswordMessage);
+
+    document.getElementById('sendCodeBtn').addEventListener('click', () => {
+      phoneMessage.textContent = '인증번호 전송 기능은 아직 구현되지 않았습니다.';
+      phoneMessage.className = 'message';
+    });
+
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+      phoneMessage.textContent = '휴대폰 인증 기능은 아직 구현되지 않았습니다.';
+      phoneMessage.className = 'message';
+    });
+
+    document.getElementById('checkIdBtn').addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+
+      if (!username) {
+        idMessage.textContent = '아이디를 먼저 입력해주세요.';
+        idMessage.className = 'message error';
+        return;
+      }
+
+      idMessage.textContent = '중복확인 기능은 아직 구현되지 않았습니다.';
+      idMessage.className = 'message';
+    });
+
+    agreeAll.addEventListener('change', () => {
+      allTerms.forEach(term => {
+        term.checked = agreeAll.checked;
+      });
+    });
+
+    allTerms.forEach(term => {
+      term.addEventListener('change', () => {
+        agreeAll.checked = allTerms.every(item => item.checked);
+      });
+    });
+
+    document.querySelectorAll('.view-link').forEach(button => {
+      button.addEventListener('click', () => {
+        alert(button.dataset.term + '\n\n약관 상세 내용은 추후 연결할 수 있습니다.');
+      });
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const verificationCode = document.getElementById('verificationCode').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const passwordValue = password.value;
+      const passwordConfirmValue = passwordConfirm.value;
+
+      if (!name || !phone || !verificationCode || !username || !passwordValue || !passwordConfirmValue) {
+        alert('필수 입력 항목을 모두 작성해주세요.');
+        return;
+      }
+
+      if (passwordValue.length < 8 || !/[^A-Za-z0-9가-힣]/.test(passwordValue)) {
+        alert('비밀번호 조건을 확인해주세요.');
+        return;
+      }
+
+      if (passwordValue !== passwordConfirmValue) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+      }
+
+      if (!requiredTerms.every(term => term.checked)) {
+        alert('필수 약관에 모두 동의해주세요.');
+        return;
+      }
+
+      alert('회원가입 화면 테스트가 완료되었습니다.\n실제 가입 기능은 서버 연동 후 구현할 수 있습니다.');
+    });
+  </script>
+</body>
+</html>

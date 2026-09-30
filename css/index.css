@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 1000px;
+    height: 1000px;
+    margin: 0 auto;
+
+    font-family: Arial, "맑은 고딕", sans-serif;
+    color: white;
+}
+
+.intro {
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    border-radius: 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* 상단 영문 */
+.logo-en {
+    font-size: 28px;
+    letter-spacing: 8px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 사이트 이름 */
+.logo {
+    font-size: 70px;
+    font-weight: bold;
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+/* 사이트 설명 */
+.subtitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.platform {
+    font-size: 18px;
+    color: #bbbbbb;
+
+    margin-bottom: 45px;
+}
+
+.images img {
+    width: 150px;
+    height: 150px;
+    margin-right: 15px;
+}
+
+/* 환영 문구 */
+.welcome {
+    font-size: 22px;
+    line-height: 1.8;
+
+    margin-bottom: 60px;
+}
+
+/* 시작하기 버튼 */
+.start-btn {
+    display: inline-block;
+
+    width: 180px;
+    padding: 18px 0;
+
+    background-color: white;
+    color: #111111;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+/* 마우스 올렸을 때 */
+.start-btn:hover {
+    background-color: #e60012;
+    color: white;
+
+    transform: translateY(-5px);
+}
+
+/* 하단 문구 */
+.footer-text {
+    position: absolute;
+    bottom: 30px;
+
+    font-size: 13px;
+    color: #777777;
+}
