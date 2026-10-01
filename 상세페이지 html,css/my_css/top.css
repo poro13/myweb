@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RomanticGumi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/GumiRomanceTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+
+/* =========================
+   헤더
+   ※ 상품 상세 영역에는 영향 X
+========================= */
+
+.wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 200px;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: rgb(255, 179, 189);
+    background-image: linear-gradient(rgb(255, 179, 189), #fff);
+}
+
+
+/* 로고 + 꽃담 */
+.wrapper .title {
+    position: absolute;
+
+    width: 400px;
+
+    left: 50%;
+    top: 20px;
+
+    transform: translateX(-50%);
+
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+
+    color: rgb(136, 48, 60);
+}
+
+.wrapper .logo {
+    display: block;
+
+    width: 100px;
+
+    margin: 0 auto;
+    padding: 0;
+}
+
+.wrapper h2 {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'RomanticGumi';
+    font-size: 3rem;
+}
+
+
+/* 로그인 / 회원가입 / 마이페이지 */
+.wrapper .main-nav {
+    position: absolute;
+
+    right: 20px;
+    top: 0;
+
+    display: flex;
+
+    margin-top: 20px;
+    padding: 0;
+
+    list-style: none;
+
+    font-family: 'NanumSquareRound';
+    font-size: 0.8rem;
+
+    color: rgb(83, 9, 19);
+}
+
+.wrapper .main-nav li {
+    margin: 0 0 0 30px;
+    padding: 0;
+}
+
+
+/* 검색창 */
+.wrapper form {
+    position: absolute;
+
+    left: 10vw;
+    top: 82px;
+
+    display: flex;
+
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper form input[type="text"] {
+    width: 300px;
+    height: 30px;
+
+    margin: 0;
+    padding: 0 8px;
+
+    border: 1px solid #fff;
+    border-radius: 5px 0 0 5px;
+
+    box-sizing: border-box;
+}
+
+.wrapper form input[type="submit"] {
+    width: 80px;
+    height: 30px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid rgb(136, 48, 60);
+    border-radius: 0 5px 5px 0;
+
+    background-color: rgb(136, 48, 60);
+    color: #fff;
+
+    cursor: pointer;
+}
+
+
+/* 헤더 아래 구분선 */
+header + hr {
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+
+/* =========================
+   푸터
+========================= */
+
+footer {
+    margin: 0;
+    padding: 10px 0 20px;
+
+    background-color: rgb(99, 61, 66);
+
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
+
+    color: rgb(224, 202, 202);
+    font-size: 0.9rem;
+}
