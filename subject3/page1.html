@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="study">
+        <div class="page2">
+
+            <section class="theory">
+                <h2>1. 기본 집계 함수</h2>
+
+                <p>
+                    SQL의 집계 함수는 여러 행의 데이터를 하나의 값으로 계산할 때 사용한다.
+                    대표적인 집계 함수는 COUNT(), SUM(), AVG(), MAX(), MIN()이 있다.
+                </p>
+
+                <ul>
+                    <li>COUNT() : 데이터의 개수를 구한다.</li>
+                    <li>SUM() : 숫자 데이터의 합계를 구한다.</li>
+                    <li>AVG() : 숫자 데이터의 평균을 구한다.</li>
+                    <li>MAX() : 가장 큰 값을 구한다.</li>
+                    <li>MIN() : 가장 작은 값을 구한다.</li>
+                </ul>
+
+                <p>
+                    집계 함수는 전체 데이터를 대상으로 사용할 수도 있고,
+                    GROUP BY와 함께 사용하여 부서별, 직급별, 지역별로 데이터를 묶어서 계산할 수도 있다.
+                </p>
+            </section>
+
+            <section class="syntax">
+                <h3>기본 형식</h3>
+                <pre>
+                    SELECT 그룹컬럼, 집계함수(컬럼)
+                    FROM 테이블명
+                    GROUP BY 그룹컬럼;
+                </pre>
+            </section>
+
+        </div>
+    </div>
+
+    <div class="page1-nextpage">
+        <a href="./page2.html">다음 페이지로</a>
+    </div>
+</body>
+
+</html>
