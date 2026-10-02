@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>까치의 옷</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: "Noto Serif KR", serif;
+
+            overflow: hidden;
+            position: relative;
+
+            background-color: #111;
+        }
+
+        /* ---------------------------------------
+           뒤쪽 배경
+           표지 이미지를 흐리게 확대해서 사용
+        --------------------------------------- */
+        body::before {
+            content: "";
+
+            position: absolute;
+            top: -30px;
+            left: -30px;
+
+            width: calc(100% + 60px);
+            height: calc(100% + 60px);
+
+            background-image: url("intro.png");
+            background-size: cover;
+            background-position: center;
+
+            filter: blur(15px);
+            transform: scale(1.05);
+
+            opacity: 0.55;
+
+            z-index: -2;
+        }
+
+        /* 배경을 조금 어둡게 */
+        body::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.35);
+
+            z-index: -1;
+        }
+
+
+        /* ---------------------------------------
+           전체 책 영역
+        --------------------------------------- */
+        .intro {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+
+        /* ---------------------------------------
+           책 표지
+        --------------------------------------- */
+        .book-cover {
+            height: 88vh;
+            max-height: 850px;
+
+            aspect-ratio: 2 / 3;
+
+            position: relative;
+
+            border-radius: 8px;
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.65),
+                0 0 0 1px rgba(255, 255, 255, 0.12);
+
+            transition: transform 0.4s ease,
+                        box-shadow 0.4s ease;
+        }
+
+        .book-cover:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, 0.75),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+        }
+
+
+        /* 표지 이미지 */
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+            object-fit: cover;
+        }
+
+
+        /* ---------------------------------------
+           표지 아래쪽 그라데이션
+           버튼이 잘 보이도록 함
+        --------------------------------------- */
+        .book-cover::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 28%;
+
+            background: linear-gradient(
+                transparent,
+                rgba(0, 0, 0, 0.65)
+            );
+
+            pointer-events: none;
+        }
+
+
+        /* ---------------------------------------
+           이야기 시작 버튼
+        --------------------------------------- */
+        .start-btn {
+            position: absolute;
+
+            left: 50%;
+            bottom: 35px;
+
+            transform: translateX(-50%);
+
+            z-index: 2;
+
+            padding: 13px 32px;
+
+            color: #fff;
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+
+            background: rgba(30, 20, 10, 0.65);
+
+            text-decoration: none;
+
+            font-size: 17px;
+            letter-spacing: 3px;
+
+            backdrop-filter: blur(5px);
+
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            color: #392516;
+
+            background-color: #f5e6c8;
+
+            border-color: #f5e6c8;
+
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+
+        /* ---------------------------------------
+           작은 안내 문구
+        --------------------------------------- */
+        .guide {
+            position: absolute;
+
+            right: 35px;
+            bottom: 25px;
+
+            color: rgba(255, 255, 255, 0.7);
+
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+
+        /* ---------------------------------------
+           모바일 화면
+        --------------------------------------- */
+        @media (max-width: 700px) {
+
+            .book-cover {
+                width: 85vw;
+                height: auto;
+
+                max-height: 90vh;
+            }
+
+            .start-btn {
+                bottom: 25px;
+
+                padding: 11px 25px;
+
+                font-size: 15px;
+            }
+
+            .guide {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <main class="intro">
+
+        <div class="book-cover">
+
+            <!-- 책 표지 이미지 -->
+            <img src="intro.png" alt="까치의 옷 책 표지">
+
+
+            <!-- 클릭하면 첫 번째 이야기 페이지로 이동 -->
+            <a href="page1.html" class="start-btn">
+                이야기 시작
+            </a>
+
+        </div>
+
+
+        <p class="guide">
+            방정환 원작 · 까치의 옷
+        </p>
+
+    </main>
+
+</body>
+
+</html>

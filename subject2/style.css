@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    color: #2f2a25;
+    background:
+        linear-gradient(rgba(250, 245, 232, 0.94), rgba(244, 235, 214, 0.94)),
+        url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    font-family: "Gowun Batang", serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.story {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 54px 0 36px;
+}
+
+.story-header {
+    text-align: center;
+    margin-bottom: 34px;
+}
+
+.eyebrow {
+    color: #7a6246;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+}
+
+h1 {
+    font-family: "Nanum Myeongjo", serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    letter-spacing: 0.12em;
+    color: #1f2b23;
+}
+
+.chapter {
+    margin-top: 10px;
+    font-size: 1.25rem;
+    color: #6b553d;
+}
+
+.scene {
+    min-height: 620px;
+    display: grid;
+    align-items: start;
+    gap: 48px;
+}
+
+.scene-right-image {
+    grid-template-columns: 1.05fr 0.95fr;
+}
+
+.scene-left-image {
+    grid-template-columns: 0.95fr 1.05fr;
+}
+
+.text-block {
+    font-size: 1.12rem;
+    line-height: 2;
+    word-break: keep-all;
+}
+
+.text-block p {
+    margin-bottom: 22px;
+}
+
+blockquote {
+    margin: 26px 0;
+    padding: 20px 24px;
+    border-left: 4px solid #6f4e37;
+    background: rgba(255, 255, 255, 0.5);
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+.story-image img {
+    width: 100%;
+    display: block;
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(45, 35, 25, 0.18);
+}
+
+.top-right,
+.top-left {
+    align-self: start;
+    margin-top: 6px;
+}
+
+.top-right img,
+.top-left img {
+    height: 420px;
+}
+
+.final-scene {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 620px;
+    gap: 48px;
+    align-items: stretch;
+}
+
+.half-image {
+    width: 100%;
+    min-height: 620px;
+}
+
+.half-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 620px;
+}
+
+.final-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ending {
+    text-align: right;
+    color: #80674c;
+    font-size: 0.95rem;
+}
+
+.page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 42px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(85, 67, 48, 0.25);
+}
+
+.page-nav a {
+    padding: 10px 16px;
+    border: 1px solid #8a6a49;
+    border-radius: 999px;
+    transition: 0.2s;
+}
+
+.page-nav a:hover {
+    background: #2d3a2f;
+    color: white;
+}
+
+@media (max-width: 850px) {
+    .story {
+        width: min(94%, 720px);
+        padding-top: 34px;
+    }
+
+    .scene,
+    .final-scene {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 28px;
+    }
+
+    .scene-left-image .story-image {
+        order: 0;
+    }
+
+    .scene-left-image .text-block {
+        order: 1;
+    }
+
+    .top-right img,
+    .top-left img,
+    .half-image img {
+        height: auto;
+        min-height: 0;
+    }
+
+    .half-image {
+        min-height: 0;
+    }
+
+    .text-block {
+        font-size: 1.02rem;
+        line-height: 1.9;
+    }
+}
