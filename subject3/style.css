@@ -120,9 +120,9 @@
 }
 
 
-/* page1 */
+/* page-basic */
 
-.page1 {
+.page-basic {
     width: 70%;
     margin: 50px auto;
     line-height: 1.8;
@@ -154,7 +154,7 @@
 }
 
 .syntax pre {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.7;
 }
 
@@ -163,7 +163,7 @@
 .problem-box{
     width: 70%;
     margin: 0 auto;
-
+    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
@@ -181,6 +181,7 @@
 }
 .query pre{
     font-size: 18px;
+    line-height: 1.7;
 }
 
 .result{
@@ -196,3 +197,15 @@
     height: auto;
     margin: 0 auto;
 }
+
+/* page4 문제 빈칸 */
+
+
+.query .blank {
+    visibility: hidden;
+}
+/* 정답을 고르면 보이게 */
+.query:has(input[value="2"]:checked) .blank{
+    visibility: visible;
+}
+

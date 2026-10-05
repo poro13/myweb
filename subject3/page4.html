@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="study">
+        <div class="page-basic">
+            <section class="theory">
+                <h2>Having 절</h2>
+                <p>HAVING 절은 GROUP BY로 만들어진 그룹에 조건을 지정할 때 사용한다.<br>
+                일반적인 WHERE절은 그룹화 하기 전에 개별 행에 조건을 적용하지만, HAVING 절은 그룹화가 끝난 후 <br>
+            집계 결과에 조건을 적용한다.<br>
+        예를 들어 부서별 평균 급여를 계산한 뒤, 평균 급여가 일정 금액 이상인 부서만 출력하고 싶을 때 HAVING절을 사용한다.<br>
+    기본 형식은 다음과 같다.</p>
+            </section>
+            <section class="syntax">
+                <h3>기본 형식</h3>
+                <pre>
+                SELECT 그룹컬럼, 집계함수(컬럼)
+                FROM 테이블명
+                GROUP BY 그룹컬럼
+                HAVING 집계함수(컬럼) 조건;
+                </pre>
+            </section>
+        </div>
+    </div>
+
+    <div class="problem-box">
+        <div class="problem">
+            <h3>문제2</h3>
+            <p>emp3 테이블에서 부서별 평균 급여를 출력하되, 평균 급어가 4,000,000원 이상인 부서만 출력하는 SQL문이다.<br>빈칸에 들어갈 식을 고르시오.</p>
+        </div>
+        <div class="query">
+            <h3>문제 쿼리</h3>
+            <pre>
+SELECT dept,
+        ROUND(AVG(salary)) AS 평균급여
+FROM emp3
+GROUP BY dept
+HAVING <span class="blank">AVG(salary)</span> >= 4000000;
+            </pre>
+            <form>
+                <label>
+                    <input type="radio" name="option" value="1">MIN(salary)
+                </label>
+                <label>
+                    <input type="radio" name="option" value="2">AVG(salary)
+                </label>
+                <label>
+                    <input type="radio" name="option" value="3"> MAX(salary)
+                </label>
+            </form>
+        </div>
+        <div class="result">
+            <h3>실행 결과</h3>
+            <img src="" alt="문제2 실행결과">
+        </div>
+    </div>
+
+    <div class="page-control">
+        <a href="./page3.html">이전 페이지로</a>
+        <a href="./page5.html">다음 페이지로</a>
+    </div>
+</body>
+</html>
