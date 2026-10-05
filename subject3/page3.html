@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제풀기 1번</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="problem-box">
+        <div class="problem">
+            <h3>문제 1</h3>
+            <p>
+                emp3 테이블에서 부서별 사원 수, 급여 합계,
+                평균 급여, 최고 급여, 최저 급여를 출력하시오.
+            </p>
+        </div>
+        <div class="query">
+            <h3>정답 쿼리</h3>
+            <pre>SELECT dept, 
+        COUNT(*) AS 사원수,
+        SUM(salary) AS 급여합계,
+        ROUND(AVG(salary)) AS 평균급여,
+        MAX(salary) AS 최고급여,
+        MIN(salary) AS 최저급여
+FROM emp3
+GROUP BY dept;
+            </pre>
+        </div>
+
+        <div class="result">
+            <h3> 실행 결과 </h3>
+            <img src="" alt="문제1 실행 결과">
+        </div>
+    </div>
+
+
+    <div class="page-control">
+        <a href="./page2.html">이전 페이지로</a>
+        <a href="./page3.html">다음 페이지로</a>
+    </div>
+</body>
+
+</html>
