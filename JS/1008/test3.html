@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    // 객체
+    <script>
+        const zerocho = {
+            name: '조현영',
+            year: 1994,
+            month: 8,
+            date: 12,
+            gender: 'M',
+        };
+        console.log(zerocho.name);
+        console.log(zerocho.date);
+        zerocho.married = false;
+        console.log(zerocho.married);
+
+        const debug = {
+            log: function(value){
+                console.log(value)
+            },
+        };
+        debug.log('반갑다.');
+
+        //console.log(({} === {}));
+        console.log((NaN === NaN));
+
+
+        const family = [
+            {name: '제로초', age: 29, gender: '남'},
+            {name: '레오', age: 5, gender: '남'},
+            {name: '체리', age: 3, gender:'여'},
+        ];
+        console.log(family[0].name);
+
+        // 객체 안에 객체가 있을 때, '조'를 '김'으로 수정.
+        const zerocho1 = {
+            name: {
+                first: '현영',
+                last: '조',
+            },
+            gender: 'm',
+        };
+        zerocho1.name.last = '김';
+        console.log(zerocho1.name);
+
+        // 참조, 얕은복사, 깊은복사
+        const array = [{j: 'k'}, {l: 'm'}];
+        const reference = array; // 참조(외부와 내부가 전부 참조)
+        console.log(array === reference);
+        console.log(array[0] === reference[0]);
+
+        const shallow = [...array];// 얕은 복사 (외부는 복사 내부는 참조)
+        console.log(array === shallow);
+        console.log(array[0] === shallow[0]);
+
+        const deep = JSON.parse(JSON.stringify(array)); 
+        // 깊은 복사 (외부,내부 복사) , 객체/배열 -> 문자열 -> 객체/배열
+        console.log(array === deep);
+        console.log(array[0] === deep[0]);
+
+        // a를 사용해 b와 c 의 name을 고양이로
+        const a = {
+            name: '강아지',
+        };
+        const b = a;
+        const c = b;
+
+        a.name = '고양이';
+        console.log(a.name);
+        console.log(b.name);
+        console.log(c.name);
+
+        // 다음 5개의 값을 각각 복사. 복사본을 수정해도 원본 변경x.
+        //1. 
+        const aa = 'b';
+        let aa_copy = aa;
+        aa_copy = 'c';
+        console.log(aa);
+        console.log(aa_copy);
+
+        //2.
+        const cc = ['d',true,1];
+        const cc_copy = JSON.parse(JSON.stringify(cc));
+        cc_copy[0] = 'e';
+        console.log(cc[0]);
+        console.log(cc_copy[0]);
+
+        //3.
+        const ee = {g: 'h'};
+        const ee_copy = JSON.parse(JSON.stringify(ee));
+        ee_copy.g = 'hh';
+        console.log(ee.g);
+        console.log(ee_copy.g);
+
+        //4.
+        const ii = [{j: 'k'}, {l: 'm'}];
+        const ii_copy = JSON.parse(JSON.stringify(ii));
+        ii_copy[0].j = 'kk';
+        ii_copy[1].l = 'mm';
+        console.log(ii[0],ii[1]);
+        console.log(ii_copy[0], ii_copy[1]);
+
+        //5.
+        const nn = {o: {p: 'q'}};
+        const nn_copy = JSON.parse(JSON.stringify(nn));
+        nn_copy.o.p = 'qq';
+        console.log(nn.o.p);
+        console.log(nn_copy.o.p);
+
+        //구조분해 할당
+        const obj = {aaaa: 1, bbbb:2};
+       // const aaaa = obj.aaaa;
+       // const bbbb = obj.bbbb;
+        const {aaaa,bbbb} = obj;
+        console.log(aaaa);
+
+        // a, c, e 속성을 구조분해 할당 문법
+        const objj = {
+            aaaaa: 'hello',
+            bbbbb: {
+                ccccc: 'hi',
+                ddddd: {eeeee: 'wow'},
+            },
+        };
+        const {
+            aaaaa,
+            bbbbb:{
+                ccccc,
+                ddddd:{
+                    eeeee
+                }
+            }
+        } = objj;
+
+        console.log(aaaaa);
+        console.log(ccccc);
+        console.log(eeeee);
+
+        // forEach
+        let arr = [1,5,4,2];
+        arr.forEach((number,index) => {
+            console.log(number,index);
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    // 함수
+    <script>
+        function a(){
+            return 10;
+        }
+        console.log(a());
+
+
+        // 매개변수 x,y,z를 받아 곱한 값을 반환하는 multiply()함수. 화살표 함수로
+        const multiply = (x,y,z) => {
+            return x * y * z;
+        };
+        console.log(multiply(10,20,30));
+
+        const func = (msg) => () => {
+            console.log(msg);
+        };
+        const func1 = (msg) => {
+            return () => {
+                console.log(msg);
+            };
+        };
+
+        func('hello')();
+        const aaa = func1('javascript');
+        aaa();
+
+        // 다음 코드의 console.log() 결과 예측 예상: 23
+        const hof = (a) => (b) => (c) => {
+            return a + (b * c);
+        };
+        const first = hof(3);
+        const second = first(4);
+        const third = second(5);
+        console.log(third);
+    </script>
+</body>
+</html>

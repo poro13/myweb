@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. 학생 객체 5개 (남3, 여2), 학생배열
+        const students = [
+            { number: 1, name: '민수', gender: '남', score: 65 },
+            { number: 2, name: '채영', gender: '여', score: 80 },
+            { number: 3, name: '민규', gender: '남', score: 100 },
+            { number: 4, name: '연희', gender: '여', score: 59 },
+            { number: 5, name: '재훈', gender: '남', score: 55 },
+        ];
+
+        // 3. 학생 총점 구하기
+        const totalScore = (students) => {
+            let total = 0;
+            for (let i = 0; i < students.length; i++) {
+                total += students[i].score;
+            }
+            return total;
+        }
+        console.log(totalScore(students));
+
+        // 4. 남/여 수 구하기
+        const manOfStu = (students) => {
+            let count = 0;
+            for (let i = 0; i < students.length; i++) {
+                if (students[i].gender === '남') {
+                    count++;
+                }
+            }
+            return count;
+        }
+        console.log(manOfStu(students));
+
+        const womanOfStu = (students) => {
+            let count = 0;
+            for (let i = 0; i < students.length; i++) {
+                if (students[i].gender === '여') {
+                    count++;
+                }
+            }
+            return count;
+        }
+        console.log(womanOfStu(students));
+
+        // 5. 합격/불합격 판별 (60점 이상 pass)
+        const makeIsPass = (students) => {
+            for(let i = 0; i < students.length; i++){
+                if(students[i].score >= 60){
+                    students[i].ispass = true;
+                }else{
+                    students[i].ispass = false;
+                }
+            }
+        }
+        makeIsPass(students);
+
+        console.log(students);
+
+
+        // 콜백함수 : 다른 메서드에 인수로 넣었을 때 실행되는 함수
+        // ex. (number, index) => {}.
+        // 매개변수 이름은 마음대로 가능.
+        // 첫번째 매개변수는 배열의 요소, 두번째 매개변수는 요소의 인덱스
+        // 추가) 3. 학생 총점 구하기 (배열의 reduce 사용)
+        const totalScoreReduce = students.reduce((acc,students) => acc + students.score, 0); // acc의 초기값 : 0
+        // reduce(콜백함수, 초기값)
+        console.log('총합 : ' + totalScoreReduce); 
+
+        // 추가) 5. 합격자,불합격자에 대한 객체 배열을 따로 만들기(filter 활용)
+        const passStu = students.filter((student) => student.score >= 60);
+        const failStu = students.filter((student) => student.score < 60);
+        console.log(passStu);
+        console.log(failStu);
+
+        students.map((student) => {
+            student.score += 10;
+        });
+        console.log(students);
+    </script>
+</body>
+
+</html>
