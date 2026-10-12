@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo{
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="frm">
+        <input type="checkbox" name="job" value="coding"> 코딩
+        <input type="checkbox" name="job" value="running"> 달리기
+        <input type="checkbox" name="job" value="reading"> 독서
+        <button type="button" id="btn">확인</button>
+    </form>
+    <hr>
+    <div id="demo">here</div>
+    <script>
+        const btn = document.getElementById("btn");
+        const demo = document.getElementById("demo");
+        btn.addEventListener("click", () => {
+            const radios = document.frm.job;
+            demo.textContent = "";
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    demo.textContent += `value : ${radios[i].value},
+                    텍스트: ${radios[i].nextSibling.textContent}`;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

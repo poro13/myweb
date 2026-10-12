@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            border: 1px solid black;
+        }
+
+        #header {
+            display: flex;
+            justify-content: center;
+            gap: 180px;
+        }
+
+        #imgs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        #result {
+            display: flex;
+            justify-content: center;
+        }
+
+        #com,
+        #user {
+            width: 100px;
+            height: 100px;
+        }
+
+        #win-count {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='main'>
+        <div id='header'>
+            <div>
+                COM
+            </div>
+            <div>
+                USER
+            </div>
+        </div>
+        <div id='imgs'>
+            <div><img id="com" src="https://placehold.co/100x100?text=%3F" alt="이미지"></div>
+            <div>VS</div>
+            <div><img id="user" src="https://placehold.co/100x100?text=%3F" alt="이미지"></div>
+        </div>
+        <div id="buttons">
+            <button id="가위">가위</button>
+            <button id="바위">바위</button>
+            <button id="보">보</button>
+        </div>
+        <div id="result">
+            <h3>가위바위보 게임 - 누가 이길까요?</h3>
+        </div>
+        <div id="win-count">
+            <p>0 / 10 의 게임 중, 승리 횟수 : 0</p>
+        </div>
+    </div>
+
+    <script>
+        // 가위바위보 이미지 주소
+        const images = {
+            '가위': './scissor.png',
+            '바위': './rock.png',
+            '보': './paper.png'
+        };
+
+        /*  하나하나씩
+        const btn1 = document.getElementById('가위');
+        const btn2 = document.getElementById('바위');
+        const btn3 = document.getElementById('보');
+
+        btn1.addEventListener('click', () => {
+            play('가위');
+        });
+        btn2.addEventListener('click', () => {
+            play('바위');
+        });
+        btn3.addEventListener('click', () => {
+            play('보');
+        });
+        */
+       
+        /* (e) 사용하기 */
+        const btn = document.getElementById('buttons');
+        btn.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') return; // 버튼이 아닌 다른 곳을 눌렀을 때.
+            play(e.target.id); // 타겟의 id값을 매개변수로('가위','바위','보')
+            // play(e.target.textContent)  // 타켓의 글자를 매개변수로('가위', '바위', '보')
+            // 이벤트 버블링 (자식 요소 -> 부모 요소) 
+            // 이벤트 캡처링 (부모 요소 -> 자식 요소)
+        });
+
+        // 게임 횟수
+        let gameCount = 0;
+        // 승리 횟수
+        let winCount = 0;
+
+        function play(userChoice) {
+            if (gameCount >= 10) {
+                return;
+            }
+
+            const choices = ['가위', '바위', '보'];
+            // pc 랜덤
+            const comChoice = choices[Math.floor(Math.random() * choices.length)]; // 0 ~ 2
+            document.getElementById('com').src = images[comChoice];
+            document.getElementById('user').src = images[userChoice];
+
+            // 승패
+            let result;
+            if (comChoice === userChoice) {
+                result = '무승부!';
+            } else if (
+                (userChoice === '가위' && comChoice === '보')
+                || (userChoice === '바위' && comChoice === '가위')
+                || (userChoice === '보' && comChoice === '바위')
+            ) {
+                result = 'USER WIN!';
+                winCount++;
+            } else {
+                result = 'COM WIN!';
+            }
+            document.getElementById('result').textContent = result;
+
+            gameCount++;
+            document.getElementById('win-count').innerHTML =
+                `<p> ${gameCount} / 10의 게임 중, 승리 횟수 : ${winCount} </p>`;
+
+            if (gameCount === 10) {
+                alert('10번의 게임 중 ' + winCount + '번 승리했습니다. 승률 : ' + (winCount / 10) * 100 + "%");
+            }
+        }
+    </script>
+</body>
+
+</html>

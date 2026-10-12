@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="x">
+        <img id = "img" src="a.png" alt="...">
+        <button id="btn">버튼</button>
+    </div>
+    <script>
+        const btn = document.getElementById("btn");
+        const x = document.getElementById("x");
+        btn.addEventListener("click", f); // 콜백함수, 클릭했을때 실행할 함수( () <- 없음 .)
+        btn.addEventListener("click", changeImage);
+        function f(){
+            x.style.backgroundColor = 'red';
+        }
+        function changeImage(){
+            const img = document.getElementById("img");
+            img.setAttribute('src', 'b.png');
+            img.style.width = '100px';
+            img.style.height = '100px';
+        }
+    </script>
+</body>
+</html>

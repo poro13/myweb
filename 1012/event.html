@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        #outer {
+            margin: 0 auto;
+            width: 600px;
+            height: 600px;
+            background-color: red;
+        }
+
+        #mid {
+            width: 400px;
+            height: 400px;
+            background-color: yellow;
+        }
+
+        #inner {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+
+        #outer,
+        #mid,
+        #inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="mid">
+            <div id="inner"></div>
+        </div>
+    </div>
+
+    <script>
+        const outer = document.getElementById("outer");
+        const mid = document.getElementById("mid");
+        const inner = document.getElementById("inner");
+
+        outer.addEventListener('click', f , true); // 이벤트 캡처링 
+        mid.addEventListener('click', f2);
+        inner.addEventListener('click', f3);
+        // 이벤트 전파 (이벤트 버블링)
+        function f() {
+            alert('outer');
+        }
+        function f2() {
+            alert('mid');
+        }
+        function f3() {
+            alert('inner');
+        }
+    </script>
+</body>
+
+</html>

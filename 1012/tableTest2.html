@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        table .num {
+            width: 80px;
+        }
+
+        table .name {
+            width: 150px;
+        }
+
+        table .tel {
+            width: 200px;
+        }
+
+        form input {
+            margin-top: 10px;
+            height: 20px;
+        }
+
+        #enroll-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>표에 데이터 입력 연습</h1>
+    <hr>
+
+    <div>
+        <table id="table">
+            <tr>
+                <th class="num">번호</th>
+                <th class="name">이름</th>
+                <th class="tel">연락처</th>
+            </tr>
+        </table>
+    </div>
+    <hr>
+
+    <button id="enroll-all">등록</button>
+
+    <script>
+        const button = document.getElementById("enroll-all");
+        const table = document.getElementById("table");
+        
+        const all_data = [
+            {
+                number: '1',
+                name: '홍길동',
+                tel : '010-1234-4566',
+            },
+            {
+                number : '2',
+                name : '이미정',
+                tel : '010-2235-2123',
+            },
+            {
+                number : '3',
+                name : '강희영',
+                tel : '010-2346-1234',
+            }
+        ];
+        
+        button.addEventListener("click", () => {
+            for(const data of all_data){
+                const number = data.number;
+                const name = data.name;
+                const tel = data.tel;
+
+                table.innerHTML += 
+                `<tr>
+                    <td>${number}</td>
+                    <td>${name}</td>
+                    <td>${tel}</td>
+                </tr>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

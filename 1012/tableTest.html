@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            border: 1px solid black;
+            text-align: center;
+        }
+        th,td{
+            border: 1px solid black;
+        }
+        
+        table .num{
+            width: 80px;
+        }
+        table .name{
+            width: 150px;
+        }
+        table .tel{
+            width: 200px;
+        }
+
+        form input{
+            margin-top: 10px;
+            height: 20px;
+        }
+
+        #enroll-btn{
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>표에 데이터 입력 연습</h1>
+    <hr>
+
+    <div>
+        <table id="table">
+            <tr>
+                <th class="num">번호</th>
+                <th class="name">이름</th>
+                <th class="tel">연락처</th>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div id="form">
+        <form name="user_form">
+            <input type="text" name="number" placeholder="번호입력..."> <br>
+            <input type="text" name="user_name" placeholder="이름입력..."> <br>
+            <input type="tel" name="tel" placeholder="전화번호입력..."> <br>
+            <button type="button" id="enroll-btn">등록</button>
+        </form>
+    </div>
+
+    <script>
+        const button = document.getElementById("enroll-btn");
+        const table = document.getElementById("table");
+
+        button.addEventListener("click", () => {
+            const number = document.user_form.number.value;
+            const user_name = document.user_form.user_name.value;
+            const tel = document.user_form.tel.value;
+
+            table.innerHTML += 
+            `<tr>
+                <td>${number}</td>
+                <td>${user_name}</td>
+                <td>${tel}</td>
+            </tr>`;
+        });
+    </script>
+</body>
+</html>
