@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="name" placeholder="이름 입력">
+    <p id="result"></p>
+
+    <script>
+        const nameInput = document.getElementById('name');
+        const result = document.getElementById('result');
+
+        nameInput.addEventListener("input", () => {
+            console.log('input: ', nameInput.value); // 화살표 함수에서는 this를 안쓴다.
+        });
+
+        nameInput.addEventListener("change", function(){
+            console.log('change : ', this.value); // 익명함수에서 this
+        })
+
+        nameInput.addEventListener("focus",function(){
+            console.log("입력란에 포커스가 들어왔습니다.");
+        });
+
+        nameInput.addEventListener("blur",function(){
+            console.log("입력란에서 포커스가 벗어났습니다.");
+        });
+    </script>
+</body>
+</html>

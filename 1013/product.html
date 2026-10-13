@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>물건 등록하기</h1>
+    <form id="frm" action="result_pro.html" method="get">
+        <label for="pro_name">상품 이름</label> <br>
+        <input type="text" id="pro_name" name="pro_name" placeholder="상품명을 입력하세요"> <br>
+
+        <label for="pro_img">상품 이미지</label> <br>
+        <input type="file" id="pro_img" name="pro_img"><br>
+
+        <label for="pro_price">상품 가격</label> <br>
+        <input type="text" id="pro_price" name="pro_price" placeholder="가격을 입력하세요."><br>
+        <input type="submit" value="등록하기">
+        <a class="link-btn" href="list_pro.html">목록보기</a>
+    </form>
+
+    <script>
+        const frm = document.getElementById("frm");
+        frm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("pro_name").value;
+            const price = Number(document.getElementById("pro_price").value);
+            const file = document.getElementById("pro_img").files[0];
+
+            if (!name || !file || !Number.isFinite(price) || price < 0) {
+                alert("상품 이름, 이미지, 가격을 올바르게 입력하세요.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const product = {
+                    id: String(Date.now()) + "-" + Math.random().toString(36).slice(2, 8),
+                    name: name,
+                    image: e.target.result,
+                    price: price
+                };
+
+                try {
+                    const products = JSON.parse(localStorage.getItem("products") || "[]");
+                    products.push(product);
+                    localStorage.setItem("products", JSON.stringify(products));
+                    location.href = "result_pro.html?id=" + encodeURIComponent(product.id);
+                } catch (error) {
+                    alert("상품을 저장하지 못했습니다. 이미지 용량이 너무 크거나 브라우저 저장 공간이 부족할 수 있습니다.");
+                    console.error(error);
+                }
+            };
+            reader.onerror = function () { alert("이미지 파일을 읽지 못했습니다."); };
+            reader.readAsDataURL(file);
+        })
+    </script>
+</body>
+
+</html>

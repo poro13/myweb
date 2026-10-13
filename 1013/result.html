@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Result Page</h1>
+    <hr>
+    <p id="id_pw">aaa 님의 패스워드는 bbb입니다.</p>
+    <script>
+        const currentUrl = window.location.href;
+        console.log(currentUrl); // http://127.0.0.1:5501/1013/result.html?userid=123&password=123
+        const currentParams = window.location.search;
+        console.log(currentParams); // ?userid=123&password=123
+
+        const params = new URLSearchParams(window.location.search);
+        console.log(params.get('userid'));
+        console.log(params.get('password'));
+
+        const id_pw = document.getElementById("id_pw");
+        id_pw.textContent = `${params.get('userid')} 님의 패스워드는 ${params.get('password')} 입니다.`;
+    </script>
+</body>
+</html>

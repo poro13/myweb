@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 등록</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 45px auto; padding: 0 20px; }
+        h1 { margin-bottom: 24px; }
+        .field { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input[type="text"], input[type="number"] { box-sizing: border-box; width: 100%; padding: 10px; }
+        input[type="file"] { padding: 8px 0; }
+        button, .link-btn { display: inline-block; padding: 10px 18px; border: 1px solid #333; background: #333; color: white; text-decoration: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .link-btn { background: white; color: #333; margin-left: 6px; }
+    </style>
+</head>
+<body>
+    <h1>물건 등록하기</h1>
+    <form id="frm" action="result_pro.html" method="get">
+        <div class="field">
+            <label for="pro_name">상품 이름</label>
+            <input type="text" id="pro_name" name="pro_name" placeholder="상품명을 입력하세요" required>
+        </div>
+        <div class="field">
+            <label for="pro_img">상품 이미지</label>
+            <input type="file" id="pro_img" name="pro_img" accept="image/*" required>
+        </div>
+        <div class="field">
+            <label for="pro_price">상품 가격</label>
+            <input type="number" id="pro_price" name="pro_price" placeholder="가격을 입력하세요" min="0" step="1" required>
+        </div>
+        <button type="submit">등록하기</button>
+        <a class="link-btn" href="list_pro.html">목록보기</a>
+    </form>
+
+    <script>
+        const frm = document.getElementById("frm");
+
+        frm.addEventListener("submit", function (event) {
+            event.preventDefault(); // GET 방식의 기본 페이지 이동을 막음
+
+            const name = document.getElementById("pro_name").value.trim();
+            const price = Number(document.getElementById("pro_price").value);
+            const file = document.getElementById("pro_img").files[0];
+            if (!name || !file || !Number.isFinite(price) || price < 0) {
+                alert("상품 이름, 이미지, 가격을 올바르게 입력하세요.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const product = {
+                    id: String(Date.now()) + "-" + Math.random().toString(36).slice(2, 8),
+                    name: name,
+                    image: e.target.result, // 실제 이미지를 Data URL 문자열로 변환
+                    price: price
+                };
+
+                try {
+                    const products = JSON.parse(localStorage.getItem("products") || "[]");
+                    products.push(product);
+                    localStorage.setItem("products", JSON.stringify(products));
+                    location.href = "result_pro.html?id=" + encodeURIComponent(product.id);
+                } catch (error) {
+                    alert("상품을 저장하지 못했습니다. 이미지 용량이 너무 크거나 브라우저 저장 공간이 부족할 수 있습니다.");
+                    console.error(error);
+                }
+            };
+            reader.onerror = function () { alert("이미지 파일을 읽지 못했습니다."); };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

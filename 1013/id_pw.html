@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="id">
+        <input type="text" id="id" placeholder="아이디를 입력하세요">
+        <button id="check_id">중복확인</button>
+        <p id="id_p">here</p>
+    </div>
+    <div class="pw">
+        <input type="password" id="pw" placeholder="비밀번호를 입력하세요">
+        <input type="password" id="pw_re" placeholder="비밀번호를 다시 입력하세요">
+        <button id="check_pw">확인</button>
+        <p id="pw_p">here</p>
+    </div>
+
+    <script>
+        const ids = [
+            "aaaa",
+            "bbbb",
+            "cccc",
+            "dddd"
+        ];
+
+        const btnId = document.getElementById("check_id");
+        const btnPw = document.getElementById("check_pw");
+
+        btnId.addEventListener("click", () =>{
+            const id = document.getElementById("id");
+            const id_p  = document.getElementById("id_p");
+            if(ids.includes(id.value.trim())){
+                id_p.textContent = "중복된 아이디 입니다.";
+                id_p.style.color = "red";
+            }else if(id.value.trim() === ""){
+                id_p.textContent = "아이디는 최소한 1자리는 입력해야 합니다.";
+                id_p.style.color = "red";
+            }else{
+                id_p.textContent = "사용 가능한 아이디 입니다.";
+                id_p.style.color = "";
+            }
+        });
+
+        btnPw.addEventListener("click", () => {
+            const pw = document.getElementById("pw");
+            const pw_re = document.getElementById("pw_re");
+            const pw_p = document.getElementById("pw_p");
+
+            if(pw.value.trim() === ""){
+                pw_p.textContent = "비밀번호는 최소한 1자리는 입력해야 합니다.";
+                pw_p.style.color = "red";    
+            }else if(pw_re.value.trim() === "" || pw.value !== pw_re.value){
+                pw_p.textContent = "비밀번호가 일치 하지 않습니다.";
+                pw_p.style.color = "red";
+            }else{
+                pw_p.textContent = "비밀번호가 일치 합니다.";
+                pw_p.style.color = "";
+            }
+        });
+    </script>
+</body>
+</html>

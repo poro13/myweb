@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{width: 220px; height: 220px;}
+    </style>
+</head>
+
+<body>
+    <h1>상품 목록</h1>
+    <a class="link-btn" href="product.html">상품 등록하기</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>이미지</th>
+                <th>상품 이름</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody id="productList"></tbody>
+    </table>
+
+    <script>
+        const products = JSON.parse(localStorage.getItem("products") || "[]" );
+        const productList = document.getElementById("productList");
+
+        if(products.length === 0){
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.colSpan = 3;
+            td.textContent = "등록된 상품이 없습니다.";
+            tr.appendChild(td);
+            productList.appendChild(tr);
+        }
+
+        products.forEach((product) => {
+            const tr = document.createElement("tr");
+
+            const imageTd = document.createElement("td");
+            const link = document.createElement("a");
+            link.href = "result_pro.html?id=" + encodeURIComponent(product.id);
+            const img = document.createElement("img");
+            img.src = product.image;
+            img.alt = product.name;
+            link.appendChild(img);
+            imageTd.appendChild(link);
+
+            const nameTd = document.createElement("td");
+            nameTd.textContent = product.name;
+
+            const priceTd = document.createElement("td");
+            priceTd.textContent = Number(product.price) + "원";
+
+            tr.append(imageTd, nameTd, priceTd);
+            productList.appendChild(tr);
+        })
+    </script>
+</body>
+
+</html>

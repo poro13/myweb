@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body> 
+    <!--
+    result.html?(userid=123&password=123) <- 쿼리 스트링
+    userid = 파라미터 이름, 123 = 파라미터의 value 
+    -->
+    <form id="frm" action="result.html" method="get">
+        <input type="text" name="userid" placeholder="Input userid..."> <br>
+        <input type="text" name="password" placeholder="Input password..."> <br>
+        <input type="submit" value="로그인">
+    </form>
+    <div id="demo">여기에 메시지가 표시 됩니다.</div>
+    <script>
+        const frm = document.getElementById("frm");
+        const demo = document.getElementById("demo");
+
+        frm.addEventListener("submit", function(e){
+            e.preventDefault(); // 해당 이벤트를 중단
+            const userid = frm.userid.value;
+            const password = frm.password.value;
+
+            if(userid === ""){
+                demo.textContent = "입력하고 눌러요.";
+                frm.userid.focus();
+                return;
+            }
+
+            if(userid.trim() !== "" && password.trim() !== ""){
+                frm.submit();
+            }
+        });
+    </script>
+</body>
+
+</html>
