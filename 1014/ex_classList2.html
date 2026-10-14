@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        .box_hidden {
+            width: 100px;
+            height: 100px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="box"></div>
+        <div class="box_hidden"></div>
+        <div class="box"></div>
+    </div>
+    <button id="click">toggle</button><br>
+    <button id="click2">replace</button>
+    <script>
+        const btn = document.getElementById("click");
+        const btn2 = document.getElementById("click2");
+        const boxes = document.querySelectorAll('.box,.box_hidden');
+        console.log(boxes);
+
+        btn.addEventListener("click", () => {
+            boxes.forEach((e1) => {
+                e1.classList.toggle('box');
+                e1.classList.toggle('box_hidden');
+            })
+        });
+
+        btn2.addEventListener("click", () => {
+            boxes.forEach((box) => {
+                if (box.className === 'box') {
+                    box.classList.replace('box', 'box_hidden');
+                } else {
+                    box.classList.replace('box_hidden', 'box');
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

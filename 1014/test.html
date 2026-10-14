@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="parse">
+        <tr>
+            <th>no</th>
+            <th>name</th>
+            <th>age</th>
+            <th>score</th>
+        </tr>
+    </table>
+
+    <script>
+        const school = {
+            students: [
+                { no: 1, name: "홍길동", age: 20, score: 85 },
+                { no: 2, name: "김철수", age: 21, score: 90 },
+                { no: 3, name: "이영희", age: 20, score: 95 },
+                { no: 4, name: "박민수", age: 22, score: 78 },
+                { no: 5, name: "최지우", age: 21, score: 88 },
+                { no: 6, name: "정하늘", age: 20, score: 92 },
+                { no: 7, name: "강민지", age: 23, score: 76 },
+                { no: 8, name: "윤서준", age: 21, score: 83 },
+                { no: 9, name: "장유진", age: 22, score: 97 },
+                { no: 10, name: "조현우", age: 20, score: 81 }
+            ]
+        };
+        // 데이터를 외부에서 받아왔다고 가정.
+        const json_school = JSON.stringify(school);
+        console.log(json_school);
+
+        // json_school의 데이터를 table에 옮기기.
+        const parse_school = JSON.parse(json_school);
+        console.log(parse_school);
+
+        // 테이블 가져오기
+        const table = document.getElementById("parse");
+
+        // forEach
+        parse_school.students.forEach((stu) => {
+            table.innerHTML += `
+            <tr>
+                <td><a href="#">${stu.no}</td>
+                <td>${stu.name}</td>
+                <td>${stu.age}</td>
+                <td>${stu.score}</td>
+            </tr>
+            `;
+        });
+
+        table.addEventListener("click", (e) => {
+            if (e.target.tagName !== "A") {
+                return;
+            }
+            e.preventDefault();
+
+            //부모관계
+            const td = e.target.parentElement;
+            const tr = td.parentElement;
+
+            //부모, 자식, 형제 관계
+            const no = td.textContent.trim();
+            const name = td.nextElementSibling.textContent.trim();
+            const age = tr.children[2].textContent.trim();
+            const score = tr.children[3].textContent.trim();
+
+            const params = new URLSearchParams({
+                no: no,
+                name: name,
+                age: age,
+                score: score
+            });
+
+            location.href = `detail.html?${params.toString()}`;
+        });
+
+    </script>
+</body>
+
+</html>

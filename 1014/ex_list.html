@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+
+    <script>
+        /*
+        getElementsByClassName - HTMLCollection (Live 방식)
+        : DOM의 변경 사항을 실시간 반영한다.
+        */
+        const items_html = document.getElementsByClassName("item");  // css의 선택자를 쓰지 않는다.
+        const items_arr = Array.from(items_html);
+
+        Array.from(items_html).forEach((e1) => {
+            e1.style.backgroundColor = "lightblue";
+        });
+        /*
+        querySelectorAll - NodeList (Static 방식)
+        : DOM의 변경 사항을 반영하지 않는다.
+        : 변경사항을 반영하려면 다시 불러와야 한다.
+        */
+        const items_node = document.querySelectorAll(".item");
+        const items_arr2 = [...items_node];
+
+        items_node.forEach((e1) => {
+            e1.style.color = "red";
+        });
+
+        console.log(`getEle-live : ${items_html.length}`);
+        console.log(`querySel-live : ${items_node.length}`);
+
+        //Live - Static 비교
+        //새 요소 추가
+        const element_div = document.createElement("div");
+        element_div.className = "item"; // 클래스 속성을 부여
+        document.body.appendChild(element_div);
+
+        console.log(`getEle-live : ${items_html.length}`);
+        console.log(`querySel-live : ${items_node.length}`);
+
+        const static_items = document.querySelectorAll('.item'); // css의 선택자를 쓴다.
+        console.log(`querySel-live : ${static_items.length}`);
+        
+        // 반복문 안에서는 동적(live)방식을 채택 안하는게 좋다.
+    </script>
+</body>
+
+</html>

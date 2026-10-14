@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>콜백함수</h1>
+    <hr>
+    <p>함수의 인수로 사용된 함수</p>
+
+    <script>
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        function calculate(numbers, callback) {
+            let results = [];
+            for (let i = 0; i < numbers.length; i++) {
+                if (callback(numbers[i])) {
+                    results.push(numbers[i]);
+                }
+            }
+            return results;
+        }
+        // arr배열에서 짝수만 걸러내여 배열로 반환하는 결과를 내기.
+        // 짝수를 걸러내는 기능의 콜백함수를 정의하고, 실행코드를 완성하시오.  
+        function evenfilter(number) {
+            if (number % 2 === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        const even = (n) => n % 2 === 0;
+        // const result = calculate(arr, evenfilter);
+        const result = calculate(arr, even);
+        console.log(result);
+    </script>
+</body>
+
+</html>

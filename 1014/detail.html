@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>학생 상세 정보</h2>
+    <table>
+        <tr>
+            <th>번호</th>
+            <td id="no"></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td id="name"></td>
+        </tr>
+        <tr>
+            <th>나이</th>
+            <td id="age"></td>
+        </tr>
+        <tr>
+            <th>점수</th>
+            <td id="score"></td>
+        </tr>
+    </table>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+
+        document.getElementById("no").textContent = params.get("no");
+        document.getElementById("name").textContent = params.get("name");
+        document.getElementById("age").textContent = params.get("age");
+        document.getElementById("score").textContent = params.get("score");
+    </script>
+</body>
+</html>

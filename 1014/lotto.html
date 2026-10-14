@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>로또번호 추출기</h1>
+    <p>1. 구매자가 로또 번호 6자리를 입력한다.<br>입력 후 제출 버튼을 누르면 자신이 고른 번호를 확인할 수 있다.</p>
+    <p>2. 번호 추출 버튼을 눌러 당첨번호 6개가 나온다.(setTimeout 사용해서 1초에 번호 1개)</p>
+    <p>3. 마지막 당첨번호가 나올 때, 구매번호와 당첨번호를 비교하여 결과가 출력된다.</p>
+    <hr>
+
+    <div class="user">
+        <form id="frm">
+            <div>
+                <label for="num1">번호 1</label>
+                <input type="number" id="num1">
+            </div>
+
+            <div>
+                <label for="num2">번호 2</label>
+                <input type="number" id="num2">
+            </div>
+
+            <div>
+                <label for="num3">번호 3</label>
+                <input type="number" id="num3">
+            </div>
+
+            <div>
+                <label for="num4">번호 4</label>
+                <input type="number" id="num4">
+            </div>
+
+            <div>
+                <label for="num5">번호 5</label>
+                <input type="number" id="num5">
+            </div>
+
+            <div>
+                <label for="num6">번호 6</label>
+                <input type="number" id="num6">
+            </div>
+
+            <input type="submit" value="제출하기">
+        </form>
+        <p id="user_submit">제출된 번호: </p>
+    </div>
+    <hr>
+    <button id="btn">번호 추출</button>
+    <div id="result"></div>
+    <hr>
+
+    <script>
+        // 구매배열과 당첨배열 선언(오름차순 구현까지)
+        let user_num = [];
+        let lotto_num = [];
+
+        // 1. user 입력 번호 검증
+        const user_form = document.getElementById("frm");
+        const user_submit = document.getElementById("user_submit");
+        user_form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            user_num = [];
+
+            for (let i = 1; i <= 6; i++) {
+                const input = document.getElementById("num" + i);
+                const value = input.value;
+                if (value === "") {
+                    alert(i + "번째 번호에 빈칸이 있습니다.");
+                    return;
+                }
+
+                const num = Number(value);
+                if (num < 1 || num > 45) {
+                    alert("1부터 45까지의 정수를 입력하세요.");
+                    return;
+                }
+
+                if (user_num.includes(num)) {
+                    alert("중복된 번호가 있습니다.");
+                    return;
+                }
+                user_num.push(num);
+            }
+            // 정렬하기
+            user_num.sort((a, b) => a - b);
+
+            user_submit.textContent = "제출된 번호: " + user_num.join(" ");
+        });
+
+        // 2. 6자리 번호 추출하기(1~45, 중복x)
+        const btn = document.getElementById("btn");
+        const results = document.getElementById("result");
+        btn.addEventListener("click", () => {
+
+            if (user_num.length !== 6) {
+                alert("로또 구매 부터 하세요.");
+                return;
+            }
+
+            while (lotto_num.length < 6) {
+                let num = Math.floor(Math.random() * 45) + 1;
+                if (!lotto_num.includes(num)) {
+                    lotto_num.push(num);
+                }
+            }
+
+            // 정렬하기
+            lotto_num.sort((a, b) => a - b);
+
+            // 3. 비교하기 (setTimeout), 순차 출력
+            btn.disabled = true;
+
+            results.innerHTML = `
+            <p id = "draw">당첨번호 : </p>
+            <div id ="compare"></div>
+            `;
+
+            const draw = document.getElementById("draw");
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    draw.textContent += lotto_num[i] + " ";
+
+                    if (i === 5) {
+                        let count = 0;
+                        let same_num = [];
+
+                        for (let j = 0; j < 6; j++) {
+                            if (lotto_num.includes(user_num[j])) {
+                                same_num.push(user_num[j]);
+                                count++;
+                            }
+                        }
+
+                        document.getElementById("compare").innerHTML = `
+                        <p>일치 번호 : ${same_num.join(", ") || "없음"}</p>
+                        <p>일치 개수 : ${count}개</p>
+                        `;
+                        btn.disabled = false;
+                    }
+                }, 1000 * (i + 1));
+            }
+        });
+
+        /* setTimeout() 쓰기 전 
+        // 3. 비교하기
+        let count = 0;
+        let same_num = [];
+
+        for (let i = 0;
+            i < lotto_num.length;
+            i++) {
+            if (lotto_num.includes(
+                user_num[i])) {
+                same_num.push(
+                    user_num[i]);
+                count++;
+            }
+        }
+
+        results.innerHTML = `
+        <p>당첨번호 :
+        ${lotto_num.join(", ")}</p>
+        <p>일치번호 :
+        ${same_num.join(", ")
+                    || "없음"}</p>
+        <p>일치 개수 :
+        ${count}개</p>
+        `;*/
+    </script>
+</body>
+
+</html>

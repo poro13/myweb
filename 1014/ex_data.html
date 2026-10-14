@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="x" value="hello" data-x="x01_txt"> <!-- 부가정보를 다루고 싶을때 data-(이름)-->
+    <input type="text" name="y" value="hi">
+    <div id="demo">here</div>
+    <button id="btn">실행</button>
+
+    <script>
+        const input_x = document.querySelector("input[name='x']");
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            const demo = document.getElementById("demo");
+            demo.textContent = input_x.dataset.x; // 받을 때는 dataset.(이름)
+        });
+    </script>
+</body>
+</html>

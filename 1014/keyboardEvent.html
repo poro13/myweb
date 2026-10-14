@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>키보드 이벤트 다루기</h1>
+    <p>키보드 이벤트로 방향키로 박스 위치 조절</p>
+    <hr>
+
+    <div id="box" class="box">
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+
+        box.addEventListener("keydown", (e) => {
+            switch(e.key){
+                case "ArrowUp":
+                    y -= 10;
+                    break;
+                case "ArrowDown":
+                    y += 10;
+                    break;
+                case "ArrowLeft":
+                    x -= 10;
+                    break;
+                case "ArrowRight":
+                    x += 10;
+                    break;
+                default:
+                    return;
+            }
+            e.preventDefault();
+
+            
+        })
+    </script>
+</body>
+</html>

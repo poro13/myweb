@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>동기/비동기</h1>
+    <hr>
+    <p>동기는 순서대로 진행되는 것이다.</p>
+    <p>비동기는 순서대로 진행되는 것이 아니다.</p>
+
+    <script>
+        function f1() {
+            console.log("f1...");
+        }
+        function f2() {
+            setTimeout(function () {
+                console.log('비동기 함수 실행...');
+            }, 1000); // 1000 = 1초 
+            console.log("f2...");
+        }
+        function f3() {
+            console.log("f3...");
+        }
+
+
+        f1();
+        f2();
+        f3();
+    </script>
+</body>
+
+</html>

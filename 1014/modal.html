@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 핵심 기능.
+        .modal{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show{
+            display: flex;
+        }*/
+        
+        /* ai가 이쁘게 꾸며준 css */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+        }
+
+        /* 모달 열기 버튼 */
+        #open_modal {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4f46e5;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #open_modal:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        /* 모달 배경 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* show 클래스가 추가되면 모달 표시 */
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* 모달창 본체 */
+        .modal-content {
+            width: 400px;
+            max-width: 90%;
+            padding: 35px;
+            background-color: white;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .modal-content p {
+            color: #777;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* 닫기 버튼 */
+        #close_modal {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4f46e5;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #close_modal:hover {
+            background-color: #4338ca;
+        }
+
+        /* 배경 나타나는 효과 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 모달이 아래에서 올라오는 효과 */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Modal 연습</h1>
+    <hr>
+    <p>아래 버튼을 클릭하면 모달창이 뜹니다.</p>
+    <button id="open_modal">open modal</button>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>알림</h2>
+            <p>
+                모달창이 성공적으로 열렸습니다.<br>
+                아래 버튼을 눌러 닫을 수 있습니다.
+            </p>
+            <button id="close_modal">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        const open_btn = document.getElementById("open_modal");
+        const modal = document.getElementById("modal");
+        const close_btn = document.getElementById("close_modal");
+
+        open_btn.addEventListener("click", () => {
+            modal.classList.add("show");
+        });
+
+        close_btn.addEventListener("click", () => {
+            modal.classList.remove("show");
+        });
+    </script>
+</body>
+
+</html>
