@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이창준</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            white-space: nowrap;
+        }
+
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        td img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> 경남 문화재 목록 </h1>
+    <hr>
+    <div id="demo"></div>
+    <button id="btn">눌러</button>
+
+    <div style="overflow-x: auto;">
+        <table id="table"></table>
+    </div>
+
+    <!--
+    <button onclick="loadDoc()">눌러</button>도 가능
+    -->
+    <script>
+        function loadDoc() {
+            console.log("start...");
+            const xhttp = new XMLHttpRequest();
+            // false - 동기
+            // true - 비동기(기본값)
+            xhttp.open("GET", "http://apis.data.go.kr/6480000/gyeongnamcultural/gyeongnamculturallist?serviceKey=ec9a25330db2e9ed5d68796b0780524773a8bb8719f45d994789f87487956ad8&numOfRows=10&pageNo=1&resultType=json", false);
+
+            // 1급 객체
+            xhttp.onload = function () {
+                //json을 객체로
+                const data = JSON.parse(xhttp.responseText);
+                console.log(data);
+                //문화재 데이터가 data.gyeongnamculturallist.body.items.item 에 들어 있음.
+                const items = data.gyeongnamculturallist.body.items.item;
+                // 테이블
+                const table = document.getElementById("table");
+
+                table.innerHTML = "";
+
+                // JSON 필드명과 테이블 제목
+                const columns = [
+                    ["DOJIJUNG_NO", "지정번호"],
+                    ["MYONGCHING", "명칭"],
+                    ["MYONGCHING_HANMUN", "명칭(한문)"],
+                    ["CONTENT", "문화재 설명"],
+                    ["MYONJUK", "수량(면적)"],
+                    ["SOYOUJA_NAME", "소유자"],
+                    ["ADMIN_NAME", "관리자"],
+                    ["SIDAE", "시대"],
+                    ["JIJUNG_DATE", "지정일"],
+                    ["ADDRESS1", "주소"],
+                    ["UTMK_X", "X좌표"],
+                    ["UTMK_Y", "Y좌표"],
+                    ["fileurl1", "이미지1"],
+                    ["fileurl2", "이미지2"],
+                    ["fileurl3", "이미지3"]
+                ];
+
+                //메인 페이지에 등록할 6개 항목만 선택
+                const mainColumns = [
+                    ["MYONGCHING", "명칭"],
+                    ["ADDRESS1", "주소"],
+                    ["SIDAE", "시대"],
+                    ["fileurl1", "이미지1"],
+                    ["fileurl2", "이미지2"],
+                    ["fileurl3", "이미지3"]
+                ];
+
+                // 주소 클릭 시 사용될 위도/경도: 아래에 실제 문화재 명칭과 좌표를 직접 입력
+                // 예: "문화재 명칭": { lat: 35.123456, lng: 128.123456 },
+                const locationMap = {
+                    "진주 촉석루": { lat: 35.1894735181692, lng: 128.081782419764 },
+                    "통영 세병관": { lat: 34.8471548606626, lng: 128.423489026299 },
+                    "밀양 영남루": { lat: 35.4915452208865, lng: 128.755608008521 },
+                    "하동 쌍계사 대웅전": { lat: 35.2327847663659, lng: 127.651035224824 },
+                    "진주성": { lat: 35.1895547579012, lng: 128.079981396917 },
+                    "함양 남계서원": { lat: 35.548900757772, lng: 127.78368293065 },
+                    "합천 해인사": { lat: 35.8016570791922, lng: 128.098144042972 },
+                    "고성 덕명리 공룡과 새발자국 화석산지": { lat: 34.9090032812095, lng: 128.154721798371 },
+                    "김해 봉황동 유적": { lat: 35.2297575737811, lng: 128.878419754441 },
+                    "사천 늑도 유적": { lat: 34.9230987854493, lng: 128.036998782302 },
+                };
+
+                /*
+                Object.keys(obj) -> 객체의 key(속성명) 들을 배열로 반환
+                Object.values(obj) -> 객체의 value(속성값) 들을 배열로 반환
+                Object.entries(obj) -> 객체의 [key, value] 쌍들을 2차원 배열로 반환
+                */
+
+                // th 생성 (메인에는 6개만)
+                const tr = document.createElement("tr");
+                mainColumns.forEach(([key, title]) => {
+                    tr.innerHTML += `<th>${title}</th>`;
+                });
+                table.appendChild(tr);
+
+                // td 삽입
+                items.forEach((item) => {
+                    const tr = document.createElement("tr");
+
+                    // 상세페이지에 col의 15개 값을 전부 쿼리스트링에
+                    const detailParams = new URLSearchParams();
+                    columns.forEach(([key]) => {
+                        detailParams.set(key, item[key] ?? "");
+                    });
+
+                    // 좌표는 위도/경도를 직접 입력해야함
+                    const location = locationMap[item.MYONGCHING];
+                    const mapParams = new URLSearchParams({
+                        lat: location.lat,
+                        lng: location.lng,
+                        name: item.MYONGCHING,
+                        address: item.ADDRESS1,
+                    });
+
+                    // 메인 페이지 td삽입.
+                    mainColumns.forEach(([key, title]) => {
+                        const value = item[key];
+                        const td = document.createElement("td");
+
+                        if (title === "명칭") {
+                            const a = document.createElement("a");
+                            a.href = `detail.html?${detailParams.toString()}`;
+                            a.textContent = value;
+                            td.appendChild(a);
+                        } else if (title === "주소") {
+                            const a = document.createElement("a");
+                            a.href = `ex_kakao01.html?${mapParams.toString()}`;
+                            a.textContent = value;
+                            td.appendChild(a);
+                        } else if (key.startsWith("fileurl") && value) {
+                            const img = document.createElement("img");
+                            img.src = value;
+                            img.alt = title;
+                            td.appendChild(img);
+                        } else {
+                            td.textContent = value;
+                        }
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+                });
+
+                //document.getElementById("demo").innerHTML = xhttp.responseText;
+            };
+
+            xhttp.send();
+            console.log("end...");
+        }
+
+
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            loadDoc();
+        });
+
+        /*
+        const table = document.getElementById("table");
+        table.addEventListener("click", (e) => {
+            if(e.target.tagName !== "A"){
+                return;
+            }
+            e.preventDefault();
+            const params = new URLSearchParams({
+                lat: 35.1894735181692,
+                lng: 128.081782419764
+            });
+
+            location.href = `ex_kakao01.html?${params.toString()}`;
+
+        });*/
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경남 문화재 목록</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th{
+            white-space: nowrap;
+        }
+
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        td img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>경남 문화재 목록</h1>
+    <hr>
+    <div id="demo"></div>
+    <button id="btn">눌러</button>
+
+    <div style="overflow-x: auto;">
+        <table id="table"></table>
+    </div>
+
+    <!--
+    <button onclick="loadDoc()">눌러</button>도 가능
+    -->
+    <script>
+        function loadDoc() {
+            console.log("start...");
+            const xhttp = new XMLHttpRequest();
+            // false - 동기
+            // true - 비동기(기본값)
+            xhttp.open("GET", "http://apis.data.go.kr/6480000/gyeongnamcultural/gyeongnamculturallist?serviceKey=ec9a25330db2e9ed5d68796b0780524773a8bb8719f45d994789f87487956ad8&numOfRows=10&pageNo=1&resultType=json", false);
+
+            // 1급 객체
+            xhttp.onload = function () {
+                //json을 객체로
+                const data = JSON.parse(xhttp.responseText);
+                console.log(data);
+                //문화재 데이터가 data.gyeongnamculturallist.body.items.item 에 들어 있음.
+                const items = data.gyeongnamculturallist.body.items.item;
+                // 테이블
+                const table = document.getElementById("table");
+
+                table.innerHTML = "";
+
+                // JSON 필드명과 테이블 제목
+                const columns = [
+                    ["DOJIJUNG_NO", "지정번호"],
+                    ["MYONGCHING", "명칭"],
+                    ["MYONGCHING_HANMUN", "명칭(한문)"],
+                    ["CONTENT", "문화재 설명"],
+                    ["MYONJUK", "수량(면적)"],
+                    ["SOYOUJA_NAME", "소유자"],
+                    ["ADMIN_NAME", "관리자"],
+                    ["SIDAE", "시대"],
+                    ["JIJUNG_DATE", "지정일"],
+                    ["ADDRESS1", "주소"],
+                    ["UTMK_X", "X좌표"],
+                    ["UTMK_Y", "Y좌표"],
+                    ["fileurl1", "이미지1"],
+                    ["fileurl2", "이미지2"],
+                    ["fileurl3", "이미지3"]
+                ];
+
+                // 메인 페이지에 표시할 6개 항목만 선택
+                const mainColumns = [
+                    ["MYONGCHING", "명칭"],
+                    ["ADDRESS1", "주소"],
+                    ["SIDAE", "시대"],
+                    ["fileurl1", "이미지1"],
+                    ["fileurl2", "이미지2"],
+                    ["fileurl3", "이미지3"]
+                ];
+
+                // 주소 클릭 시 사용될 위도/경도: 아래에 실제 문화재 명칭과 좌표를 직접 입력
+                // 예: "문화재 명칭": { lat: 35.123456, lng: 128.123456 },
+                const locationMap = {
+                };
+
+                /*
+                Object.keys(obj) -> 객체의 key(속성명) 들을 배열로 반환
+                Object.values(obj) -> 객체의 value(속성값) 들을 배열로 반환
+                Object.entries(obj) -> 객체의 [key, value] 쌍들을 2차원 배열로 반환
+                */
+                //console.log(Object.keys(items[0]));
+                // th 생성 (메인에는 6개 항목만)
+                const tr = document.createElement("tr");
+                mainColumns.forEach(([key, title]) => {
+                    tr.innerHTML += `<th>${title}</th>`;
+                });
+                table.appendChild(tr);
+
+                // td 삽입
+                items.forEach((item) => {
+                    const tr = document.createElement("tr");
+
+                    // 상세페이지에는 기존 columns의 15개 값을 전부 쿼리스트링으로 전달
+                    const detailParams = new URLSearchParams();
+                    columns.forEach(([key]) => {
+                        detailParams.set(key, item[key] ?? "");
+                    });
+
+                    // 좌표는 API의 UTMK_X/Y와 다르므로 위도/경도를 직접 등록해야 함
+                    const location = locationMap[item.MYONGCHING];
+                    const mapParams = new URLSearchParams({
+                        lat: location?.lat ?? "",
+                        lng: location?.lng ?? "",
+                        name: item.MYONGCHING ?? "",
+                        address: item.ADDRESS1 ?? ""
+                    });
+
+                    mainColumns.forEach(([key, title]) => {
+                        const value = item[key];
+                        const td = document.createElement("td");
+
+                        if (key === "MYONGCHING") {
+                            const a = document.createElement("a");
+                            a.href = `detail.html?${detailParams.toString()}`;
+                            a.textContent = value || "-";
+                            td.appendChild(a);
+                        } else if (key === "ADDRESS1") {
+                            const a = document.createElement("a");
+                            a.href = `ex_kakao01.html?${mapParams.toString()}`;
+                            a.textContent = value || "-";
+                            td.appendChild(a);
+                        } else if (key.startsWith("fileurl") && value) {
+                            const img = document.createElement("img");
+                            img.src = value;
+                            img.alt = title;
+                            td.appendChild(img);
+                        } else {
+                            td.textContent = value === "" || value == null ? "-" : value;
+                        }
+
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+                });
+
+                //document.getElementById("demo").innerHTML = xhttp.responseText;
+            };
+
+            xhttp.send();
+            console.log("end...");
+        }
+
+
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            loadDoc();
+        });
+
+
+    </script>
+</body>
+
+</html>

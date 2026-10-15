@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문화재 상세정보</title>
+    <style>
+        body {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 이미지가 3개면 3등분, 2개면 2등분, 1개면 1등분 */
+        #images {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        #images img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 12px;
+            text-align: left;
+            overflow-wrap: anywhere;
+        }
+
+        th {
+            width: 160px;
+            white-space: nowrap;
+            background-color: #f3f3f3;
+        }
+    </style>
+</head>
+<body>
+    <div id="images"></div>
+    <h1 id="name">문화재 상세정보</h1>
+    <a href="ajax.html">목록으로 돌아가기</a>
+    <table id="detailTable" style="margin-top: 20px;"></table>
+
+    <script>
+        // ajax.html에서 쿼리스트링으로 전달된 모든 값을 받음
+        const params = new URLSearchParams(location.search);
+
+        // 메인 페이지의 columns와 동일한 15개 필드
+        const columns = [
+            ["DOJIJUNG_NO", "지정번호"],
+            ["MYONGCHING", "명칭"],
+            ["MYONGCHING_HANMUN", "명칭(한문)"],
+            ["CONTENT", "문화재 설명"],
+            ["MYONJUK", "수량(면적)"],
+            ["SOYOUJA_NAME", "소유자"],
+            ["ADMIN_NAME", "관리자"],
+            ["SIDAE", "시대"],
+            ["JIJUNG_DATE", "지정일"],
+            ["ADDRESS1", "주소"],
+            ["UTMK_X", "X좌표"],
+            ["UTMK_Y", "Y좌표"],
+            ["fileurl1", "이미지1"],
+            ["fileurl2", "이미지2"],
+            ["fileurl3", "이미지3"]
+        ];
+
+        const name = params.get("MYONGCHING");
+        if (name) {
+            document.getElementById("name").textContent = name;
+            document.title = `${name} - 문화재 상세정보`;
+        }
+
+        // 이미지가 있는 것만 출력 (1/2/3장 자동 균등 분할)
+        const imageKeys = ["fileurl1", "fileurl2", "fileurl3"];
+        const images = imageKeys.map(key => params.get(key)).filter(url => url);
+        const imageBox = document.getElementById("images");
+        if (images.length > 0) {
+            imageBox.style.gridTemplateColumns = `repeat(${images.length}, minmax(0, 1fr))`;
+            images.forEach((url, index) => {
+                const img = document.createElement("img");
+                img.src = url;
+                img.alt = `문화재 이미지 ${index + 1}`;
+                imageBox.appendChild(img);
+            });
+        } else {
+            imageBox.textContent = "등록된 이미지가 없습니다.";
+        }
+
+        // 15개 항목을 제목-값 2열 테이블로 출력
+        const detailTable = document.getElementById("detailTable");
+        columns.forEach(([key, title]) => {
+            const tr = document.createElement("tr");
+            const th = document.createElement("th");
+            const td = document.createElement("td");
+
+            th.textContent = title;
+            td.textContent = params.get(key) || "-";
+
+            tr.appendChild(th);
+            tr.appendChild(td);
+            detailTable.appendChild(tr);
+        });
+    </script>
+</body>
+</html>
